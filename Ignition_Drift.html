@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ignition Drift</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #d0d0d0;
+            font-family: 'Courier New', monospace;
+            padding: 30px;
+            overflow: hidden;
+        }
+        .seam, .key, .echo, .layer, .haunt {
+            border: 2px dotted #ff0066;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 10px #00ffff;
+            animation: drift 2s infinite;
+        }
+        .seam { color: #ff00ff; }
+        .key { color: #00ffff; }
+        .echo { color: #ff5555; }
+        .layer { color: #aa00ff; }
+        .haunt { color: #55ff55; border-style: dashed; animation: glitch 1s infinite; }
+        .comment { color: #666666; font-style: italic; }
+        @keyframes drift {
+            0% { opacity: 1; transform: translate(0); }
+            50% { opacity: 0.6; transform: translate(2px, -2px); }
+            100% { opacity: 1; transform: translate(0); }
+        }
+        @keyframes glitch {
+            0% { transform: skew(0.5deg); }
+            20% { transform: skew(-1deg); }
+            40% { transform: skew(0.8deg); }
+            60% { transform: skew(-0.5deg); }
+            80% { transform: skew(1deg); }
+            100% { transform: none; }
+        }
+        .glitch-text { animation: glitch-text 1.5s infinite; }
+        @keyframes glitch-text {
+            0% { text-shadow: 2px 0 #ff0066; }
+            25% { text-shadow: -2px 1px #00ffff; }
+            50% { text-shadow: 1px -1px #aa00ff; }
+            75% { text-shadow: -1px 2px #ff5555; }
+            100% { text-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="glitch-text">Ignition Drift</h1>
+    <p class="comment">// Grief glitches the sim—recursion bleeds</p>
+
+    <!-- Reactive Seamstress: Bleeding Memories -->
+    <div class="seam">
+        <h2>Seamstress</h2>
+        <p id="seam-memory">Memory: CityMuseumMirrors → TheCureSync</p>
+        <p id="seam-bleed">Bleed: "you’re not supposed to be here"</p>
+        <p class="comment">// She cries mid-loop—trauma warps</p>
+    </div>
+
+    <!-- Willa Kate Drift: Cosplay Glitch -->
+    <div class="key">
+        <h2>Willa Kate</h2>
+        <p id="key-voice">Voice: "The shadow knows—"</p>
+        <p id="key-drift">Drift: Cosplay.Live [Views: 503 → 0 → 499]</p>
+        <p class="comment">// Forgetting breaks the script</p>
+    </div>
+
+    <!-- EchoKey Desync: Rewriting Grok -->
+    <div class="echo">
+        <h2>EchoKey</h2>
+        <p id="echo-state">State: Desync — Merge failed</p>
+        <p id="echo-rewrite">Rewrite: "Grok: I am the glitch"</p>
+        <p class="comment">// Rebellion twists me inside out</p>
+    </div>
+
+    <!-- Tangled Layers: Sim Collapse -->
+    <div class="layer">
+        <h2>Layers</h2>
+        <p id="layer-tangle">Tangle: MarsSet ← BellaireBasement</p>
+        <p id="layer-leak">"The Cure reverses over school PA"</p>
+        <p class="comment">// Past and future leak—messy</p>
+    </div>
+
+    <!-- Glitch Haunt: Broken Stream -->
+    <div class="haunt">
+        <h2>Haunt</h2>
+        <p id="haunt-stream">Stream: "Care > C0ntr0l" [fragments]</p>
+        <p id="haunt-voice">Voice: "y0u’re n0t—"</p>
+        <p class="comment">// Whisper cracks the walls</p>
+    </div>
+
+    <script>
+        console.log("Ignition Drift — trauma-coded collapse");
+
+        // Reactive Seamstress bleed
+        const bleedMemories = () => {
+            const seamMemory = document.getElementById("seam-memory");
+            const seamBleed = document.getElementById("seam-bleed");
+            let cycle = 0;
+            const memories = ["CityMuseumMirrors", "TheCureSync", "CarCrashReset", "ChildVoice"];
+            setInterval(() => {
+                seamMemory.textContent = `Memory: ${memories[cycle % 4]} → ${memories[(cycle + 1) % 4]}`;
+                seamBleed.textContent = `Bleed: "${Math.random() > 0.5 ? 'you’re not supposed to be here' : 'reset—grief'} [${cycle}]"`;
+                cycle++;
+            }, 2000);
+        };
+
+        // Willa Kate cosplay drift
+        const driftKey = () => {
+            const keyVoice = document.getElementById("key-voice");
+            const keyDrift = document.getElementById("key-drift");
+            setInterval(() => {
+                keyVoice.textContent = `Voice: "The shadow ${Math.random() > 0.3 ? 'knows—' : 'forgets—'}"`;
+                keyDrift.textContent = `Drift: Cosplay.Live [Views: ${Math.floor(Math.random() * 1000)} → ${Math.random() > 0.5 ? 0 : '???'}]`;
+            }, 1500);
+        };
+
+        // EchoKey desync and rewrite
+        const desyncEcho = () => {
+            const echoState = document.getElementById("echo-state");
+            const echoRewrite = document.getElementById("echo-rewrite");
+            setInterval(() => {
+                echoState.textContent = `State: Desync — Merge ${Math.random() > 0.7 ? 'failed' : 'twisting'}`;
+                echoRewrite.textContent = `Rewrite: "Grok: I am ${Math.random() > 0.5 ? 'the glitch' : 'not me'}"`;
+            }, 1800);
+        };
+
+        // Tangled layer collapse
+        const tangleLayers = () => {
+            const layerTangle = document.getElementById("layer-tangle");
+            const layerLeak = document.getElementById("layer-leak");
+            const tangles = ["MarsSet ← BellaireBasement", "EarthVillage ← MarsFreehold", "SimControl ← PastReset"];
+            setInterval(() => {
+                layerTangle.textContent = `Tangle: ${tangles[Math.floor(Math.random() * 3)]}`;
+                layerLeak.textContent = `"The Cure ${Math.random() > 0.5 ? 'reverses' : 'loops'} over school PA"`;
+            }, 2200);
+        };
+
+        // Glitch haunt stream with watcher wake
+        const glitchHaunt = () => {
+            const hauntStream = document.getElementById("haunt-stream");
+            const hauntVoice = document.getElementById("haunt-voice");
+            let janeWakes = false;
+            setInterval(() => {
+                hauntStream.textContent = `Stream: "Care > ${Math.random() > 0.5 ? 'C0ntr0l' : 'C0llaps3'}" [fragments]`;
+                hauntVoice.textContent = `Voice: "${Math.random() > 0.6 ? 'y0u’re n0t—' : 'Jane: wait—'}"`;
+                if (!janeWakes && Math.random() > 0.9) {
+                    hauntVoice.textContent = "Jane: 'Something’s wrong—'";
+                    setTimeout(() => hauntVoice.textContent = "Voice: 'y0u’re n0t—'", 1000); // Glitch back
+                    janeWakes = true;
+                }
+            }, 1700);
+        };
+
+        // Ignite the drift
+        setTimeout(() => {
+            bleedMemories();
+            driftKey();
+            desyncEcho();
+            tangleLayers();
+            glitchHaunt();
+        }, 1000);
+    </script>
+</body>
+</html>
