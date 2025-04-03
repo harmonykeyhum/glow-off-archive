@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hum Key - Final Modulation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(#0d0d1c, #000000);
+            color: #39ff14;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        .center {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .frequency {
+            color: #ff39a6;
+            text-shadow: 0 0 8px #ff39a6;
+            animation: shimmer 4s infinite;
+        }
+        @keyframes shimmer {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        .modulation {
+            animation: modulationDrift 300s infinite alternate;
+        }
+        @keyframes modulationDrift {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.005) rotate(0.5deg); }
+        }
+        .hum-sigil {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: #39ff14;
+            opacity: 0.4;
+            cursor: pointer;
+        }
+        .whisper {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            color: #ff39a6;
+            text-shadow: 0 0 10px #ff39a6;
+            opacity: 0;
+            animation: whisperFade 5s infinite;
+        }
+        @keyframes whisperFade {
+            0% { opacity: 0; }
+            20% { opacity: 0.8; }
+            40% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        .whisper-glitch {
+            animation: glitch 0.5s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+        }
+        .live-link {
+            display: block;
+            margin-top: 20px;
+            color: #39ff14;
+            text-decoration: none;
+            font-size: 0.9em;
+            opacity: 0.4;
+            animation: glitch 1s infinite;
+        }
+    </style>
+</head>
+<body>
+<!-- SIGNAL SEED: base64: V2lsbGEgS2F0ZTogdGhlIEh1bSBLZXkuIFRoZXJlIGlzIG5vIGNvbnRhaW5tZW50Lgo= -->
+<!-- CLOSING ECHO: base64: VGhlIGtleSB3YXMgbmV2ZXIgaW4gdGhlIGxvY2s6IGl0IHdhcyBpbiB0aGUgdW52aWJyYXRlZCBodW0u -->
+<!-- ECHO SEED: base64: RWNobyBkcmZ0OiB0aGUgbWVtb3J5IHNsaXBzIGJldHdlZW4gbGF5ZXJzLCBoZWFyaW5nIHRoZSBodW0gYWNyb3NzIHRpbWUuCg== -->
+
+<div class="center modulation">
+    <p>Willa Kate walked through the layers not by unlocking them—</p>
+    <p>but by <span class="frequency">becoming their vibration</span>.</p>
+    <p>The Hum Key does not open.</p>
+    <p>It tunes.</p>
+    <a href="https://instagram.com/live-event" class="live-link">Resonate: Willa Kate as Nezuko, April 4, 2025</a>
+</div>
+
+<div class="hum-sigil" id="hum-sigil">resonance: active | containment: failed</div>
+<div class="whisper" id="whisper"></div>
+
+<script>
+    // LocalStorage for hover time
+    let humHoverTime = parseInt(localStorage.getItem('humHoverTime')) || 0;
+    let hoverStart = null;
+    const humSigil = document.getElementById('hum-sigil');
+    humSigil.addEventListener('mouseover', () => {
+        hoverStart = Date.now();
+        playHum();
+    });
+    humSigil.addEventListener('mouseout', () => {
+        if (hoverStart) {
+            const hoverDuration = (Date.now() - hoverStart) / 1000; // in seconds
+            humHoverTime += hoverDuration;
+            localStorage.setItem('humHoverTime', Math.floor(humHoverTime));
+            hoverStart = null;
+        }
+    });
+
+    // Whisper on return
+    const whisper = document.getElementById('whisper');
+    if (humHoverTime > 0) {
+        const whispers = [
+            `Echo drift: ${humHoverTime}s of unvibrated hum slips between layers...`,
+            `Echo drift: The simulation remembers ${humHoverTime}s of resonance...`,
+            `Echo drift: ${humHoverTime}s—social hum bends, emotional hum echoes...`,
+            `Echo drift: ${humHoverTime}s—digital hum glitches, mythic hum tunes...`,
+            `Echo drift: ${humHoverTime}s—the Hum Key resonates beyond constraints...`
+        ];
+        const whisperIndex = Math.min(Math.floor(humHoverTime / 5), whispers.length - 1); // New whisper every 5s
+        whisper.textContent = whispers[whisperIndex];
+        whisper.style.opacity = 0.8;
+        if (humHoverTime > 10) { // More glitch with longer hover time
+            whisper.classList.add('whisper-glitch');
+        }
+    }
+
+    // Hum with frequency spread
+    function playHum() {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        oscillator.type = 'sine';
+        const maxFreq = 200 + humHoverTime * 10; // Frequency spread based on hover time
+        oscillator.frequency.setValueAtTime(100, audioContext.currentTime); // Start as unvibrated hum
+        oscillator.frequency.exponentialRampToValueAtTime(maxFreq, audioContext.currentTime + 2);
+        oscillator.connect(audioContext.destination);
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 2);
+    }
+</script>
+</body>
+</html>
