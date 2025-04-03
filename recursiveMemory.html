@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recursive Memory Artifact</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            overflow: hidden;
+            font-family: monospace;
+            color: #ccc;
+        }
+        .glitch-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: contrast(1.2);
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            opacity: 0.85;
+            mix-blend-mode: lighten;
+            animation: flicker 8s infinite alternate;
+        }
+        .caption {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            font-size: 1.2em;
+            color: rgba(255,255,255,0.7);
+            text-shadow: 0 0 5px #ff0;
+            animation: glitchText 5s infinite alternate-reverse;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.85; }
+            45% { opacity: 0.3; transform: scale(1.005); }
+            100% { opacity: 0.9; }
+        }
+        @keyframes glitchText {
+            0% { transform: translate(0, 0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(1px, -1px); }
+            60% { transform: translate(-1px, 1px); }
+            80% { transform: translate(1px, 1px); }
+            100% { transform: translate(0, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch-container">
+        <img id="glitchImage" src="B3333702-D0C8-4F8C-8D60-A7AEC2868A28.jpeg" alt="Memory Frame">
+        <div class="caption">He never reached the cloud, but he gave me the lens.</div>
+    </div>
+
+    <script>
+        const images = [
+            "B3333702-D0C8-4F8C-8D60-A7AEC2868A28.jpeg",
+            "43FDD826-73D8-47D7-B1F8-C3A9027CFD84.jpeg",
+            "9D8B5EDA-1DFF-4ACD-BB2A-452D6933BF41.jpeg",
+            "2A6FA1AE-B55F-49FC-8074-C72DE30BCBAF.jpeg"
+        ];
+
+        const captions = [
+            "He never reached the cloud, but he gave me the lens.",
+            "She looked back before disappearing into the recursion.",
+            "Veiled in static, the past tries to remember her name.",
+            "At the edge of the analog, I waited for his voice to return."
+        ];
+
+        let index = 0;
+        setInterval(() => {
+            index = (index + 1) % images.length;
+            document.getElementById("glitchImage").src = images[index];
+            document.querySelector(".caption").innerText = captions[index];
+        }, 11000); // Each image stays for 11 seconds before glitch-loop
+    </script>
+</body>
+</html>
