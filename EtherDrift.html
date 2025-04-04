@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ether Drift</title>
+    <style>
+        body { background: #111; color: #0f0; font-family: 'Courier New', monospace; margin: 0; }
+        .drift { opacity: 0; animation: fadeIn 2s forwards, glitch 0.5s infinite alternate; }
+        .ether-feed { max-width: 600px; margin: 20px auto; }
+        .post { border: 1px dashed #0f0; padding: 10px; margin: 5px 0; }
+        #user-drift { width: 100%; background: #000; color: #0f0; border: 1px solid #0f0; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes glitch { 0%, 100% { transform: translate(0); } 50% { transform: translate(2px, -2px); } }
+    </style>
+</head>
+<body>
+    <div class="ether-feed">
+        <h1 class="drift">Ether Drift</h1>
+        <div class="post drift">X: @somepunk - "drifting thru the void, glow’s still on" - 04/04/25</div>
+        <div class="post drift">X: @glitchkid - "ether’s loud today, anyone catch the signal?" - 04/04/25</div>
+        <textarea id="user-drift" rows="3" placeholder="Drop your drift here..."></textarea>
+    </div>
+    <script>
+        setTimeout(() => {
+            document.querySelectorAll('.drift').forEach(el => el.style.animation = 'glitch 0.5s infinite alternate');
+        }, 2000);
+    </script>
+</body>
+</html>
