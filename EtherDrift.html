@@ -21,9 +21,17 @@
         <textarea id="user-drift" rows="3" placeholder="Drop your drift here..."></textarea>
     </div>
     <script>
-        setTimeout(() => {
-            document.querySelectorAll('.drift').forEach(el => el.style.animation = 'glitch 0.5s infinite alternate');
-        }, 2000);
-    </script>
+    setTimeout(() => {
+        document.querySelectorAll('.drift').forEach(el => el.style.animation = 'glitch 0.5s infinite alternate');
+
+        // Create new drift post
+        const newPost = document.createElement('div');
+        newPost.className = 'post drift';
+        newPost.textContent = 'X: @anomaly137 - "the seam remembers what we were told to forget" - 04/04/25';
+        
+        // Append to feed
+        document.querySelector('.ether-feed').appendChild(newPost);
+    }, 2000);
+</script>
 </body>
 </html>
